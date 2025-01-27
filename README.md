@@ -1,166 +1,117 @@
 # HRD System
 
-A comprehensive Human Resource Management System built with Laravel, featuring employee management, attendance tracking, payroll processing, recruitment, and leave management.
+Sistem manajemen sumber daya manusia modern untuk membantu perusahaan berkembang dengan lebih efisien.
 
-## Features
+## Fitur Utama
 
-### 1. Employee Management
+### 1. Manajemen Karyawan
 
--   Complete employee profile management
--   Personal information tracking
--   Department and position management
--   Employment status tracking
--   Salary and bank information
--   BPJS and tax information
+-   Pengelolaan data karyawan
+-   Informasi pribadi dan kontrak
+-   Manajemen dokumen penting
 
-### 2. Attendance Management
+### 2. Absensi Digital
 
--   Daily attendance tracking
--   Multiple attendance status (present, late, early leave)
--   Location tracking for check-in/out
--   Device and IP tracking
--   Attendance history and reporting
+-   Sistem absensi modern
+-   Fitur lokasi
+-   Laporan kehadiran real-time
+-   Monitoring kehadiran
 
-### 3. Payroll Management
+### 3. Penggajian
 
--   Monthly payroll processing
--   Automatic salary calculation
--   Support for allowances and deductions
--   Overtime and bonus management
--   Tax and BPJS calculations
--   Payslip generation
--   Payment status tracking
+-   Otomatisasi penghitungan gaji
+-   Slip gaji digital
+-   Laporan penggajian
+-   Integrasi dengan absensi
 
-### 4. Recruitment Management
+### 4. Manajemen Cuti
 
--   Job vacancy posting
--   Multiple employment types
--   Application tracking system
--   Resume and document management
--   Interview scheduling
--   Application status tracking
--   Candidate evaluation
+-   Pengajuan cuti online
+-   Persetujuan cuti terstruktur
+-   Tracking sisa cuti
+-   Notifikasi status cuti
 
-### 5. Leave Management
+### 5. Rekrutmen
 
--   Multiple leave types
--   Leave request submission
--   Attachment support
--   Approval workflow
--   Leave balance tracking
--   Leave history
+-   Portal lowongan kerja
+-   Manajemen pelamar
+-   Tracking proses rekrutmen
+-   Database kandidat
 
-## Requirements
+### 6. Laporan & Analitik
 
--   PHP >= 8.1
--   Composer
--   Node.js & NPM
--   SQLite/MySQL
--   Laravel 11.x
+-   Dashboard interaktif
+-   Laporan komprehensif
+-   Analisis data karyawan
+-   Insight performa HR
 
-## Installation
+## Teknologi
 
-1. Clone the repository
+-   Laravel (Backend Framework)
+-   Tailwind CSS (UI Framework)
+-   Alpine.js (JavaScript Framework)
+-   MySQL (Database)
+
+## Antarmuka Pengguna
+
+### Halaman Utama
+
+-   Hero section modern dengan gambar dan call-to-action
+-   Fitur-fitur utama dengan ikon dan deskripsi
+-   Desain responsif untuk semua ukuran layar
+-   Footer informatif dengan link penting
+
+### Dashboard
+
+-   Statistik real-time
+-   Grafik dan chart informatif
+-   Quick actions untuk tugas umum
+-   Notifikasi penting
+
+## Instalasi
+
+1. Clone repository
 
 ```bash
-git clone https://github.com/yourusername/hrd-system.git
-cd hrd-system
+git clone [repository-url]
 ```
 
-2. Install PHP dependencies
+2. Install dependencies
 
 ```bash
 composer install
-```
-
-3. Install and compile frontend dependencies
-
-```bash
 npm install
-npm run dev
 ```
 
-4. Configure environment variables
+3. Setup environment
 
 ```bash
 cp .env.example .env
 php artisan key:generate
 ```
 
-5. Configure your database in `.env`
-
-```
-DB_CONNECTION=sqlite
-# or for MySQL
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=hrd_system
-DB_USERNAME=root
-DB_PASSWORD=
-```
-
-6. Run migrations and seeders
+4. Migrasi database
 
 ```bash
-php artisan migrate:fresh --seed
+php artisan migrate
 ```
 
-7. Start the development server
+5. Compile assets
 
 ```bash
-php artisan serve
+npm run dev
 ```
 
-## Default Admin Account
+## Penggunaan
 
--   Email: admin@example.com
--   Password: password
+1. Login ke sistem menggunakan kredensial yang diberikan
+2. Akses fitur melalui sidebar navigasi
+3. Kelola data sesuai dengan hak akses yang dimiliki
 
-## Project Structure
+## Kontribusi
 
-```
-hrd-system/
-├── app/
-│   ├── Http/
-│   │   ├── Controllers/    # Application controllers
-│   │   └── Middleware/     # Custom middleware
-│   └── Models/            # Eloquent models
-├── database/
-│   ├── factories/         # Model factories for testing/seeding
-│   ├── migrations/        # Database migrations
-│   └── seeders/          # Database seeders
-├── resources/
-│   ├── css/              # CSS assets
-│   ├── js/               # JavaScript assets
-│   └── views/            # Blade templates
-│       ├── employees/    # Employee management views
-│       ├── attendances/  # Attendance management views
-│       ├── payrolls/     # Payroll management views
-│       ├── jobs/         # Recruitment management views
-│       └── leaves/       # Leave management views
-├── routes/
-│   └── web.php          # Web routes
-├── public/              # Public assets
-└── storage/            # File uploads and logs
-```
+Silakan berkontribusi dengan membuat pull request atau melaporkan issues.
 
-## Key Files
+## Lisensi
 
--   `app/Models/`: Contains all model definitions
--   `database/migrations/`: Database structure
--   `database/seeders/`: Sample data generation
--   `resources/views/`: Frontend templates
--   `routes/web.php`: Route definitions
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+[MIT License](LICENSE)

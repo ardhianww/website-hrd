@@ -1,193 +1,155 @@
-<x-app-layout>
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Detail Pengajuan Cuti') }}
-            </h2>
+@extends('layouts.app')
+
+@section('header')
+Detail Pengajuan Cuti
+@endsection
+
+@section('content')
+<div class="bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+        <!-- Header with Actions -->
+        <div class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:pb-6">
             <div>
-                @if($leave->status === 'pending')
-                <a href="{{ route('leaves.edit', $leave) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded mr-2">
-                    {{ __('Edit') }}
+                <h2 class="text-2xl font-bold text-gray-900">{{ $leave->employee->name }}</h2>
+                <p class="mt-2 text-sm text-gray-500">{{ $leave->employee->department }} - {{ $leave->employee->position }}</p>
+            </div>
+            <div class="mt-4 flex space-x-3 md:mt-0">
+                @if(auth()->user()->is_admin || auth()->id() == $leave->employee_id)
+                <a href="{{ route('leaves.edit', $leave) }}" class="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    <svg class="-ml-1 mr-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                    </svg>
+                    Edit
                 </a>
                 <form action="{{ route('leaves.destroy', $leave) }}" method="POST" class="inline">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                        {{ __('Hapus') }}
+                    <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                        <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                        Hapus
                     </button>
                 </form>
                 @endif
             </div>
         </div>
-    </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <!-- Employee Information -->
-                    <div class="mb-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">{{ __('Informasi Karyawan') }}</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">{{ __('ID Karyawan') }}</p>
-                                <p class="mt-1">{{ $leave->employee->employee_id }}</p>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">{{ __('Nama Karyawan') }}</p>
-                                <p class="mt-1">{{ $leave->employee->name }}</p>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">{{ __('Departemen') }}</p>
-                                <p class="mt-1">{{ $leave->employee->department }}</p>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">{{ __('Posisi') }}</p>
-                                <p class="mt-1">{{ $leave->employee->position }}</p>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Leave Status -->
+        <div class="mt-6 border-b border-gray-200 pb-6">
+            <h3 class="text-lg font-medium text-gray-900">Status Pengajuan</h3>
+            <div class="mt-4">
+                @php
+                $statusClasses = [
+                'pending' => 'bg-yellow-100 text-yellow-800',
+                'approved' => 'bg-green-100 text-green-800',
+                'rejected' => 'bg-red-100 text-red-800'
+                ];
+                $statusLabels = [
+                'pending' => 'Pending',
+                'approved' => 'Disetujui',
+                'rejected' => 'Ditolak'
+                ];
+                @endphp
+                <span class="inline-flex items-center rounded-full px-3 py-0.5 text-sm font-medium {{ $statusClasses[$leave->status] }}">
+                    {{ $statusLabels[$leave->status] }}
+                </span>
+            </div>
+        </div>
 
-                    <!-- Leave Information -->
-                    <div class="mb-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">{{ __('Informasi Cuti') }}</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">{{ __('Jenis Cuti') }}</p>
-                                <p class="mt-1">{{ __($leave->type) }}</p>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">{{ __('Status') }}</p>
-                                <p class="mt-1">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                        {{ $leave->status === 'approved' ? 'bg-green-100 text-green-800' : '' }}
-                                        {{ $leave->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
-                                        {{ $leave->status === 'rejected' ? 'bg-red-100 text-red-800' : '' }}">
-                                        {{ ucfirst($leave->status) }}
-                                    </span>
-                                </p>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">{{ __('Tanggal Mulai') }}</p>
-                                <p class="mt-1">{{ $leave->start_date->format('d/m/Y') }}</p>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">{{ __('Tanggal Selesai') }}</p>
-                                <p class="mt-1">{{ $leave->end_date->format('d/m/Y') }}</p>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">{{ __('Durasi') }}</p>
-                                <p class="mt-1">{{ $leave->duration }} hari</p>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">{{ __('Disetujui Oleh') }}</p>
-                                <p class="mt-1">{{ $leave->approved_by ? $leave->approver->name : '-' }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Reason and Attachment -->
-                    <div class="mb-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">{{ __('Alasan dan Lampiran') }}</h3>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <div class="mb-4">
-                                <p class="text-sm font-medium text-gray-500">{{ __('Alasan Cuti') }}</p>
-                                <p class="mt-1">{{ $leave->reason }}</p>
-                            </div>
-                            @if($leave->status === 'rejected')
-                            <div class="mb-4">
-                                <p class="text-sm font-medium text-gray-500">{{ __('Alasan Penolakan') }}</p>
-                                <p class="mt-1">{{ $leave->rejection_reason ?? '-' }}</p>
-                            </div>
-                            @endif
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">{{ __('Lampiran') }}</p>
-                                @if($leave->attachment_path)
-                                <p class="mt-1">
-                                    <a href="{{ Storage::url($leave->attachment_path) }}" class="text-blue-600 hover:text-blue-900" target="_blank">
-                                        {{ basename($leave->attachment_path) }}
-                                    </a>
-                                </p>
-                                @else
-                                <p class="mt-1">-</p>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Additional Information -->
-                    <div class="mb-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">{{ __('Informasi Tambahan') }}</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">{{ __('Dibuat Pada') }}</p>
-                                <p class="mt-1">{{ $leave->created_at->format('d/m/Y H:i:s') }}</p>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">{{ __('Diperbarui Pada') }}</p>
-                                <p class="mt-1">{{ $leave->updated_at->format('d/m/Y H:i:s') }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Action Buttons -->
-                    <div class="flex items-center justify-between mt-6">
-                        <a href="{{ route('leaves.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                            {{ __('Kembali') }}
-                        </a>
-                        @if(auth()->user()->is_admin && $leave->status === 'pending')
-                        <div>
-                            <form action="{{ route('leaves.approve', $leave) }}" method="POST" class="inline">
-                                @csrf
-                                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2">
-                                    {{ __('Setujui') }}
-                                </button>
-                            </form>
-                            <button type="button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="showRejectModal()">
-                                {{ __('Tolak') }}
-                            </button>
-                        </div>
-                        @endif
-                    </div>
+        <!-- Leave Details -->
+        <div class="mt-6 border-b border-gray-200 pb-6">
+            <h3 class="text-lg font-medium text-gray-900">Detail Cuti</h3>
+            <dl class="mt-4 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Tipe Cuti</dt>
+                    <dd class="mt-1 text-sm text-gray-900">
+                        @php
+                        $typeLabels = [
+                        'annual' => 'Tahunan',
+                        'sick' => 'Sakit',
+                        'maternity' => 'Melahirkan',
+                        'marriage' => 'Menikah',
+                        'other' => 'Lainnya'
+                        ];
+                        @endphp
+                        {{ $typeLabels[$leave->type] }}
+                    </dd>
                 </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Durasi</dt>
+                    <dd class="mt-1 text-sm text-gray-900">{{ $leave->duration }} hari</dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Tanggal Mulai</dt>
+                    <dd class="mt-1 text-sm text-gray-900">{{ $leave->start_date->format('d F Y') }}</dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Tanggal Selesai</dt>
+                    <dd class="mt-1 text-sm text-gray-900">{{ $leave->end_date->format('d F Y') }}</dd>
+                </div>
+            </dl>
+        </div>
+
+        <!-- Reason and Attachment -->
+        <div class="mt-6 border-b border-gray-200 pb-6">
+            <h3 class="text-lg font-medium text-gray-900">Alasan dan Dokumen</h3>
+            <dl class="mt-4 grid grid-cols-1 gap-x-4 gap-y-6">
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Alasan Cuti</dt>
+                    <dd class="mt-1 text-sm text-gray-900 whitespace-pre-line">{{ $leave->reason }}</dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Lampiran</dt>
+                    <dd class="mt-1 text-sm text-gray-900">
+                        @if($leave->attachment_path)
+                        <a href="{{ asset('storage/' . $leave->attachment_path) }}" target="_blank" class="text-indigo-600 hover:text-indigo-900">
+                            {{ basename($leave->attachment_path) }}
+                        </a>
+                        @else
+                        <span class="text-gray-500">Tidak ada lampiran</span>
+                        @endif
+                    </dd>
+                </div>
+            </dl>
+        </div>
+
+        <!-- Approval Information -->
+        @if($leave->status !== 'pending')
+        <div class="mt-6 border-b border-gray-200 pb-6">
+            <h3 class="text-lg font-medium text-gray-900">Informasi Persetujuan</h3>
+            <dl class="mt-4 grid grid-cols-1 gap-x-4 gap-y-6">
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Disetujui/Ditolak Oleh</dt>
+                    <dd class="mt-1 text-sm text-gray-900">{{ $leave->approved_by ? $leave->approver->name : '-' }}</dd>
+                </div>
+                @if($leave->status === 'rejected')
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Alasan Penolakan</dt>
+                    <dd class="mt-1 text-sm text-gray-900 whitespace-pre-line">{{ $leave->rejection_reason ?: 'Tidak ada alasan' }}</dd>
+                </div>
+                @endif
+            </dl>
+        </div>
+        @endif
+    </div>
+
+    <!-- Footer -->
+    <div class="bg-gray-50 px-4 py-4 sm:px-6">
+        <div class="flex justify-between">
+            <a href="{{ route('leaves.index') }}" class="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                <svg class="-ml-1 mr-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                </svg>
+                Kembali
+            </a>
+            <div class="text-sm text-gray-500">
+                <p>Dibuat pada: {{ $leave->created_at->format('d F Y H:i') }}</p>
+                @if($leave->updated_at->ne($leave->created_at))
+                <p>Diperbarui pada: {{ $leave->updated_at->format('d F Y H:i') }}</p>
+                @endif
             </div>
         </div>
     </div>
-
-    <!-- Reject Modal -->
-    @if(auth()->user()->is_admin && $leave->status === 'pending')
-    <div id="rejectModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full">
-        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-            <div class="mt-3">
-                <h3 class="text-lg font-medium text-gray-900 mb-4">{{ __('Alasan Penolakan') }}</h3>
-                <form action="{{ route('leaves.reject', $leave) }}" method="POST">
-                    @csrf
-                    <div class="mb-4">
-                        <textarea name="rejection_reason" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" required></textarea>
-                    </div>
-                    <div class="flex justify-end">
-                        <button type="button" onclick="hideRejectModal()" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">
-                            {{ __('Batal') }}
-                        </button>
-                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                            {{ __('Tolak') }}
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    @push('scripts')
-    <script>
-        function showRejectModal() {
-            document.getElementById('rejectModal').classList.remove('hidden');
-        }
-
-        function hideRejectModal() {
-            document.getElementById('rejectModal').classList.add('hidden');
-        }
-    </script>
-    @endpush
-    @endif
-</x-app-layout>
+</div>
+@endsection
