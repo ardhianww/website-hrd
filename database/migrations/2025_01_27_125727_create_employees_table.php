@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('employee_id')->unique(); // ID Karyawan
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone');
-            $table->text('address');
+            $table->string('phone')->nullable();
+            $table->text('address')->nullable();
             $table->date('birth_date');
             $table->enum('gender', ['male', 'female']);
             $table->string('department');
@@ -25,11 +25,11 @@ return new class extends Migration
             $table->date('join_date');
             $table->enum('status', ['active', 'probation', 'terminated']);
             $table->decimal('base_salary', 12, 2);
-            $table->string('bank_name');
-            $table->string('bank_account');
-            $table->string('npwp');
-            $table->string('bpjs_tk'); // BPJS Ketenagakerjaan
-            $table->string('bpjs_kes'); // BPJS Kesehatan
+            $table->string('bank_name')->nullable();
+            $table->string('bank_account')->nullable();
+            $table->string('npwp')->nullable();
+            $table->string('bpjs_tk')->nullable(); // BPJS Ketenagakerjaan
+            $table->string('bpjs_kes')->nullable(); // BPJS Kesehatan
             $table->timestamps();
             $table->softDeletes();
         });

@@ -95,6 +95,14 @@ class LeaveController extends Controller
     public function show(Leave $leave)
     {
         $leave->load(['employee', 'approver']);
+
+        // Jika data leave tidak ditemukan, redirect ke index
+        if (!$leave) {
+            return redirect()
+                ->route('leaves.index')
+                ->with('error', 'Data cuti tidak ditemukan');
+        }
+
         return view('leaves.show', compact('leave'));
     }
 

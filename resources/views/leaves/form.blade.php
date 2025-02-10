@@ -31,6 +31,29 @@
                     @enderror
                 </div>
             </div>
+            @else
+                @if(auth()->user()->employee)
+                    <input type="hidden" name="employee_id" value="{{ auth()->user()->employee->id }}">
+                @else
+                    <div class="rounded-md bg-yellow-50 p-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-yellow-800">Data Karyawan Tidak Ditemukan</h3>
+                                <div class="mt-2 text-sm text-yellow-700">
+                                    <p>Anda belum terdaftar sebagai karyawan. Silakan hubungi admin untuk mendaftarkan data karyawan Anda.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <a href="{{ route('leaves.index') }}" class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Kembali</a>
+                    </div>
+                @endif
             @endif
 
             <!-- Leave Details -->
@@ -41,21 +64,13 @@
                         <label for="type" class="block text-sm font-medium text-gray-700">Tipe Cuti</label>
                         <select id="type" name="type" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                             <option value="">Pilih Tipe</option>
-                            @foreach(['annual' => 'Tahunan', 'sick' => 'Sakit', 'maternity' => 'Melahirkan', 'marriage' => 'Menikah', 'other' => 'Lainnya'] as $value => $label)
+                            @foreach(['annual' => 'Tahunan', 'sick' => 'Sakit', 'maternity' => 'Melahirkan', 'paternity' => 'Cuti Ayah', 'unpaid' => 'Cuti Tanpa Gaji'] as $value => $label)
                             <option value="{{ $value }}" {{ old('type', $leave->type ?? '') == $value ? 'selected' : '' }}>
                                 {{ $label }}
                             </option>
                             @endforeach
                         </select>
                         @error('type')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div>
-                        <label for="duration" class="block text-sm font-medium text-gray-700">Durasi (Hari)</label>
-                        <input type="number" name="duration" id="duration" min="1" value="{{ old('duration', $leave->duration ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                        @error('duration')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>

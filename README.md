@@ -1,117 +1,90 @@
-# HRD System
+# HR Management System
 
-Sistem manajemen sumber daya manusia modern untuk membantu perusahaan berkembang dengan lebih efisien.
+Sistem manajemen HR untuk mengelola data karyawan, absensi, penggajian, rekrutmen, dan cuti.
 
-## Fitur Utama
+## Fitur
 
-### 1. Manajemen Karyawan
+- Manajemen Karyawan
+  - CRUD data karyawan
+  - Validasi data (termasuk batasan gaji maksimum 999,999,999)
+  - Pencarian dan filter berdasarkan nama, ID, email, departemen, dan status
 
--   Pengelolaan data karyawan
--   Informasi pribadi dan kontrak
--   Manajemen dokumen penting
+- Absensi
+  - Clock in/out
+  - Riwayat absensi
+  - Laporan absensi per karyawan
 
-### 2. Absensi Digital
+- Penggajian
+  - Perhitungan gaji otomatis
+  - Slip gaji
+  - Riwayat penggajian
 
--   Sistem absensi modern
--   Fitur lokasi
--   Laporan kehadiran real-time
--   Monitoring kehadiran
+- Rekrutmen
+  - Posting lowongan kerja
+  - Manajemen lamaran
+  - Tracking status lamaran
 
-### 3. Penggajian
+- Manajemen Cuti
+  - Pengajuan cuti
+  - Approval/reject cuti
+  - Riwayat cuti per karyawan
 
--   Otomatisasi penghitungan gaji
--   Slip gaji digital
--   Laporan penggajian
--   Integrasi dengan absensi
+## Perubahan Terbaru
 
-### 4. Manajemen Cuti
+- Perbaikan validasi input gaji karyawan (maksimum 999,999,999)
+- Penambahan user admin default untuk manajemen sistem
+- Perbaikan tampilan form pengajuan cuti
+- Penanganan error untuk data yang tidak ditemukan
 
--   Pengajuan cuti online
--   Persetujuan cuti terstruktur
--   Tracking sisa cuti
--   Notifikasi status cuti
-
-### 5. Rekrutmen
-
--   Portal lowongan kerja
--   Manajemen pelamar
--   Tracking proses rekrutmen
--   Database kandidat
-
-### 6. Laporan & Analitik
-
--   Dashboard interaktif
--   Laporan komprehensif
--   Analisis data karyawan
--   Insight performa HR
-
-## Teknologi
-
--   Laravel (Backend Framework)
--   Tailwind CSS (UI Framework)
--   Alpine.js (JavaScript Framework)
--   MySQL (Database)
-
-## Antarmuka Pengguna
-
-### Halaman Utama
-
--   Hero section modern dengan gambar dan call-to-action
--   Fitur-fitur utama dengan ikon dan deskripsi
--   Desain responsif untuk semua ukuran layar
--   Footer informatif dengan link penting
-
-### Dashboard
-
--   Statistik real-time
--   Grafik dan chart informatif
--   Quick actions untuk tugas umum
--   Notifikasi penting
-
-## Instalasi
+## Setup
 
 1. Clone repository
-
 ```bash
-git clone [repository-url]
+git clone [URL_REPOSITORY]
+cd hr
 ```
 
 2. Install dependencies
-
 ```bash
 composer install
 npm install
 ```
 
 3. Setup environment
-
 ```bash
 cp .env.example .env
 php artisan key:generate
 ```
 
-4. Migrasi database
-
+4. Setup database
 ```bash
+# Update konfigurasi database di .env
 php artisan migrate
+php artisan db:seed
 ```
 
-5. Compile assets
-
+5. Create storage link
 ```bash
+php artisan storage:link
+```
+
+6. Run development server
+```bash
+php artisan serve
 npm run dev
 ```
 
-## Penggunaan
+## Default Admin Account
 
-1. Login ke sistem menggunakan kredensial yang diberikan
-2. Akses fitur melalui sidebar navigasi
-3. Kelola data sesuai dengan hak akses yang dimiliki
+```
+Email: admin@admin.com
+Password: password
+```
 
 ## Kontribusi
 
-Silakan berkontribusi dengan membuat pull request atau melaporkan issues.
+Silakan buat pull request untuk kontribusi.
 
-## Lisensi
+## License
 
 [MIT License](LICENSE)

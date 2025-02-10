@@ -73,18 +73,18 @@ class JobVacancyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(JobVacancy $vacancy)
+    public function show(JobVacancy $job)
     {
-        $vacancy->load('applications');
-        return view('jobs.show', ['job' => $vacancy]);
+        $job->load('applications');
+        return view('jobs.show', compact('job'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(JobVacancy $vacancy)
+    public function edit(JobVacancy $job)
     {
-        return view('jobs.form', ['job' => $vacancy]);
+        return view('jobs.form', compact('job'));
     }
 
     /**

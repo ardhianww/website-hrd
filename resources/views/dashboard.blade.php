@@ -47,7 +47,7 @@ Dashboard
                         <dd class="flex items-baseline">
                             <div class="text-2xl font-semibold text-gray-900">{{ $presentToday }}</div>
                             <div class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
-                                <span>{{ number_format(($presentToday / $totalEmployees) * 100, 1) }}%</span>
+                                <span>{{ $totalEmployees > 0 ? number_format(($presentToday / $totalEmployees) * 100, 1) : 0 }}%</span>
                             </div>
                         </dd>
                     </dl>

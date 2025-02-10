@@ -11,12 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create admin user
-        \App\Models\User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => bcrypt('password'),
-            'is_admin' => true,
+        $this->call([
+            AdminSeeder::class,
         ]);
 
         // Create regular users
