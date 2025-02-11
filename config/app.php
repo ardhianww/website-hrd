@@ -51,8 +51,9 @@ return [
     | the application so that it's available within Artisan commands.
     |
     */
+    'url' => env('APP_URL', 'https://company-profile-production-69d6.up.railway.app'),
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'asset_url' => env('ASSET_URL', 'https://company-profile-production-69d6.up.railway.app'),
 
     /*
     |--------------------------------------------------------------------------
