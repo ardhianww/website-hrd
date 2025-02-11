@@ -19,7 +19,7 @@ RUN composer install
 RUN sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/' .env
 RUN sed -i 's|APP_URL=http://localhost|APP_URL=https://company-profile-production-c11f.up.railway.app/|' .env
 
-RUN touch /app/database/database.sqlite
+RUN touch /app/database/database.mysql
 
 # Run Vite build
 RUN yarn && yarn run build
