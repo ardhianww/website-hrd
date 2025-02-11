@@ -16,7 +16,7 @@ COPY . /app
 RUN cp .env.example .env
 RUN composer install
 
-RUN sed -i 's/DB_CONNECTION=mysql/' .env
+RUN sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/' .env
 RUN sed -i 's|APP_URL=http://localhost|APP_URL=https://website-hrd-production.up.railway.app/|' .env
 
 # Run Vite build
