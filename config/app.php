@@ -55,6 +55,16 @@ return [
 
     'asset_url' => env('ASSET_URL', 'https://website-hrd-production.up.railway.app/'),
 
+    'mysql' => [
+        'driver' => 'mysql',
+        'host' => env('DB_HOST', 'a5uqf.h.filess.io'),
+        'port' => env('DB_PORT', '3307'),
+        'database' => env('DB_DATABASE', 'hrd_softremain'),
+        'username' => env('DB_USERNAME', 'hrd_softremain'),
+        'password' => env('DB_PASSWORD', '546e01c749c8a9f91151867a5f853118e9b435d6')
+    ],
+
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
