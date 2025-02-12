@@ -217,7 +217,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Company Info -->
                 <div class="space-y-8">
-                    <h3 class="text-2xl font-bold text-indigo-600">HRD System</h3>
+                    <h3 class="text-2xl font-bold text-indigo-600">PT PRIMA PAPER INDONESIA</h3>
                     <p class="text-gray-500 text-base">
                         Sistem manajemen sumber daya manusia modern untuk membantu perusahaan Anda berkembang.
                     </p>
@@ -273,7 +273,7 @@
 
             <div class="mt-12 border-t border-gray-200 pt-8">
                 <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-base text-gray-400">&copy; {{ date('Y') }} HRD System. All rights reserved.</p>
+                    <p class="text-base text-gray-400">&copy; {{ date('Y') }} PT PRIMA PAPER INDONESIA. All rights reserved.</p>
                     <div class="mt-4 md:mt-0 flex space-x-6">
                         <a href="#" class="text-gray-400 hover:text-gray-500">Privacy Policy</a>
                         <a href="#" class="text-gray-400 hover:text-gray-500">Terms of Service</a>
