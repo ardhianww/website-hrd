@@ -7,6 +7,7 @@ use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\JobVacancyController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\Employee;
@@ -122,5 +123,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Auth Routes
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 require __DIR__ . '/auth.php';
