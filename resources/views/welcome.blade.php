@@ -22,7 +22,7 @@
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <div class="flex-shrink-0 flex items-center">
-                        <h1 class="text-2xl font-bold text-indigo-600">HRD System</h1>
+                        <h1 class="text-2xl font-bold text-indigo-600">PT PRIMA PAPER INDONESIA</h1>
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -82,7 +82,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                    Fitur Lengkap untuk Kebutuhan HR
+                    Fitur Lengkap Kebutuhan HR
                 </h2>
                 <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
                     Semua yang Anda butuhkan untuk mengelola sumber daya manusia dalam satu platform.
@@ -199,7 +199,7 @@
     <div class="bg-indigo-700">
         <div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-                <span class="block">Siap untuk meningkatkan</span>
+                <span class="block">Siap meningkatkan</span>
                 <span class="block">manajemen HR Anda?</span>
             </h2>
             <p class="mt-4 text-lg leading-6 text-indigo-200">
