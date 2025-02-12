@@ -1,4 +1,4 @@
-# HR Management System
+# HRD Management System
 
 Sistem manajemen HR untuk mengelola data karyawan, absensi, penggajian, rekrutmen, dan cuti.
 
