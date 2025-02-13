@@ -2,8 +2,8 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'HRD System') }}</title>
@@ -17,9 +17,13 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/darkMode.css') }}" rel="stylesheet">
 </head>
 
-<body class="font-sans antialiased">
+<body class="{{ request()->cookie('theme') === 'dark' ? 'dark-mode' : '' }} font-sans antialiased">
     <div class="min-h-screen bg-gray-50">
         <!-- Sidebar -->
         <aside class="fixed inset-y-0 left-0 bg-white shadow-lg max-h-screen w-64 hidden lg:block">
@@ -217,6 +221,8 @@
     </nav>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/darkMode.js') }}"></script>
 </body>
 
 </html>
