@@ -1,6 +1,6 @@
 .dark-mode {
-    background-color: #1a1a1a;
-    color: #ffffff;
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
 }
 
 .dark-mode .navbar {
@@ -8,12 +8,44 @@
 }
 
 .dark-mode .card {
-    background-color: #2d2d2d;
-    border-color: #404040;
+    background-color: #2d2d2d !important;
+    border-color: #404040 !important;
 }
 
 .dark-mode .form-control {
-    background-color: #333;
-    border-color: #404040;
-    color: #ffffff;
+    background-color: #333 !important;
+    border-color: #404040 !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .dropdown-menu {
+    background-color: #2d2d2d !important;
+    border-color: #404040 !important;
+}
+
+.dark-mode .dropdown-item {
+    color: #ffffff !important;
+}
+
+.dark-mode .dropdown-item:hover {
+    background-color: #404040 !important;
+}
+
+.dark-mode .table {
+    color: #ffffff !important;
+}
+
+.dark-mode .modal-content {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .list-group-item {
+    background-color: #2d2d2d !important;
+    border-color: #404040 !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .form-check-label {
+    color: #ffffff !important;
 } 
